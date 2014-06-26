@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../css/starter-template.css" rel="stylesheet">
+     <link href="../css/dashboard.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -30,29 +31,7 @@
     <![endif]-->
   </head>
 
-  <body>
-
-  <!--   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>/.nav-collapse
-      </div>
-    </div> -->
-    
+  <body>    
     <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -72,17 +51,39 @@
             <li><a href="#">Help</a></li>
           </ul>
           <form class="navbar-form navbar-right">
-            <input type="text" placeholder="Search..." class="form-control">
+           <div class="input-group">
+           <input type="text" placeholder="Search..." class="form-control">
+             <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+           </div>
           </form>
         </div>
       </div>
       </div>
 
-    <div class="container">
-
-      <div class="starter-template">
+    <div class="container-fluid">
+      <div class="row">
+             <div class="col-sm-3 col-md-2 sidebar">
+               <ul class="nav nav-sidebar">
+            		<li class="active"><a href="#">What's New</a></li>
+            		<li ><a href="#" class="sideSubMenu" data-content="This is the content for the popover Apparel">Apparel</a></li>
+            		<li><a href="#" class="sideSubMenu" data-content="This is the content for the popover Books">Books</a></li>
+            		<li><a href="#" class="sideSubMenu" data-content="This is the content for the popover Cosmetics">Cosmetics</a></li>
+            		<li><a href="#" class="sideSubMenu" data-content="This is the content for the popover Computers">Computers</a></li>
+            		<li><a href="#" class="sideSubMenu" data-content="This is the content for the popover Gifts">Gifts & Stationary</a></li>
+            		<li><a href="#" class="sideSubMenu" data-content="This is the content for the popover Grocery">Grocery</a></li>
+            		<li><a href="#" class="sideSubMenu" data-content="This is the content for the popover Mobile">Mobile</a></li>
+          </ul>
+             </div>
+             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+             		<div class="starter-template">
         <h1>Bootstrap starter template</h1>
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <button type="button" class="btn btn-lg btn-danger popover-dismiss" data-toggle="popover" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</button>
+        <a id="example1" href="#" data-content="This is the content for the popover." >Your Popover Text Here.</a>
+      </div>
+             </div>
       </div>
 
     </div><!-- /.container -->
@@ -93,6 +94,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/customerhomescreen.js"></script>
   </body>
 </html>
 
