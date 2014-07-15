@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/customerhomescreen")
+	@RequestMapping("/whatsnew")
     public String helloWorld() {
  
-        return "customerhomescreen";
+        return "whatsnew";
     }
 }
