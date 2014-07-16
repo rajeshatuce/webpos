@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/whatsnew")
-    public String helloWorld() {
+	@RequestMapping("/home")
+    public String invokeHomeController() {
  
         return "whatsnew";
     }
