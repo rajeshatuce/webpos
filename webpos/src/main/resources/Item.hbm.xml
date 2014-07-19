@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 20, 2014 1:48:03 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dazzlersoft.webpos.model.Item" table="ITEM" schema="WEBPOS">
+        <id name="itemId" type="long">
+            <column name="ITEM_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="category" class="com.dazzlersoft.webpos.model.Category" fetch="select">
+            <column name="CATEGORY_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="itemName" type="string">
+            <column name="ITEM_NAME" length="40" not-null="true" />
+        </property>
+        <property name="itemDescription" type="string">
+            <column name="ITEM_DESCRIPTION" length="100" />
+        </property>
+        <property name="activityStatus" type="string">
+            <column name="ACTIVITY_STATUS" length="5" not-null="true" />
+        </property>
+        <set name="itemInventories" table="ITEM_INVENTORY" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ITEM_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dazzlersoft.webpos.model.ItemInventory" />
+        </set>
+    </class>
+</hibernate-mapping>

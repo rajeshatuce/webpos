@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 20, 2014 1:48:03 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dazzlersoft.webpos.model.Image" table="IMAGE" schema="WEBPOS">
+        <id name="imageId" type="long">
+            <column name="IMAGE_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="imageFileName" type="string">
+            <column name="IMAGE_FILE_NAME" length="40" not-null="true" />
+        </property>
+        <property name="imageKey" type="string">
+            <column name="IMAGE_KEY" length="100" not-null="true" unique="true" />
+        </property>
+        <set name="itemInventories" table="ITEM_INVENTORY" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IMAGE_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dazzlersoft.webpos.model.ItemInventory" />
+        </set>
+    </class>
+</hibernate-mapping>

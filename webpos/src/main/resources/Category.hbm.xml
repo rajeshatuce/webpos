@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 20, 2014 1:48:03 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.dazzlersoft.webpos.model.Category" table="CATEGORY" schema="WEBPOS">
+        <id name="categoryId" type="long">
+            <column name="CATEGORY_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="categoryName" type="string">
+            <column name="CATEGORY_NAME" length="30" not-null="true" />
+        </property>
+        <property name="activityStatus" type="string">
+            <column name="ACTIVITY_STATUS" length="5" not-null="true" />
+        </property>
+        <set name="items" table="ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CATEGORY_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.dazzlersoft.webpos.model.Item" />
+        </set>
+    </class>
+</hibernate-mapping>
