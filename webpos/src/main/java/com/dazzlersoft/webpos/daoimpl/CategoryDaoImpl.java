@@ -9,6 +9,8 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -122,6 +124,6 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Category> fetchAllCategory() {
-		return sessionFactory.getCurrentSession().createCriteria(Category.class).list();
+		return sessionFactory.getCurrentSession().createCriteria(Category.class).add(Restrictions.eq("activityStatus", "A")).addOrder(Order.asc("categoryName")).list();
 	}
 }

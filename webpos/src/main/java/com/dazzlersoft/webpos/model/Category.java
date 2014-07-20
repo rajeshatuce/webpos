@@ -16,6 +16,16 @@ public class Category implements java.io.Serializable {
 	private long categoryId;
 	private String categoryName;
 	private String activityStatus;
+	private String selected;
+	
+	public String getSelected() {
+		return selected;
+	}
+
+	public void setSelected(String selected) {
+		this.selected = selected;
+	}
+
 	private Set<Item> items = new HashSet<Item>(0);
 
 	public Category() {
