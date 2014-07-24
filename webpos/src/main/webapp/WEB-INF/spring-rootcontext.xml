@@ -53,4 +53,16 @@
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    
+    <bean id="repository" class="org.apache.jackrabbit.core.RepositoryImpl">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean id="config" class="org.apache.jackrabbit.core.config.RepositoryConfig" factory-method="create">
+        <constructor-arg index="0" value="repository.xml"/>
+        <constructor-arg index="1" value="E:\Rajesh" />
+    </bean>
+    <bean id="jackRabbitDao" class="com.dazzlersoft.webpos.daoimpl.JackRabbitDao"  >
+       <property name="userId" value="username" />
+       <property name="password" value="password" ></property>
+    </bean>
     </beans>
