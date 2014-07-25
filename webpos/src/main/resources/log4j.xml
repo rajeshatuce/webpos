@@ -11,7 +11,7 @@
 
     <!-- param entries must come before layout entry.            -->
     <appender name="MainLogFile" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="E:\\Rajesh\\webpos_mainlog.log" />
+        <param name="File" value="E:/Rajesh/webpos_mainlog.log" />
         <param name="MaxFileSize" value="100MB" />
         <param name="MaxBackupIndex" value="9" />
         <param name="Threshold" value="INFO" />
@@ -24,7 +24,7 @@
     
         <!-- param entries must come before layout entry.            -->
     <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="E:\\Rajesh\\webpos_applog.log" />
+        <param name="File" value="E:/Rajesh/webpos_applog.log" />
         <param name="MaxFileSize" value="100MB" />
         <param name="MaxBackupIndex" value="9" />
 
