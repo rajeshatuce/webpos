@@ -14,6 +14,16 @@ public class Product implements Serializable {
 	
 	private String productPrice;
 	
+	private Long inventoryId;
+	
+	public Long getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(Long inventoryId) {
+		this.inventoryId = inventoryId;
+	}
+
 	private String productImageUrl;
 
 	public String getProductName() {

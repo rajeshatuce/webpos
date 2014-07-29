@@ -65,6 +65,7 @@ public class WebPosServiceImpl implements WebPosService {
 						product.setProductName(item.getItemName());
 						product.setProductPrice(WebPosUtility.formatNumber(inventory.getUnitPrice()));
 						product.setProductImageUrl(inventory.getImage().getImageKey());
+						product.setInventoryId(inventory.getItemInventoryId());
 						result.add(product);
 					}
 

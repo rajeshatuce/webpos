@@ -9,6 +9,7 @@
           <div class="caption">
             <p>${product.productName}</p>
             <h3>Rs.${product.productPrice}</h3>
+            <input type="hidden" id="productKey" value="${product.inventoryId}" />
           </div>
         </div>
       </div>
