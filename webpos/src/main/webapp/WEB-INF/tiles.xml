@@ -15,4 +15,9 @@
         <put-attribute name="title" value="Web Shop -- The ultimate stop..." />
         <put-attribute name="body" value="/WEB-INF/pages/whatsnew.jsp" />
     </definition>
+    
+    <definition name="productDescription" extends="base.definition">
+        <put-attribute name="title" value="Web Shop -- The ultimate stop...Product Description Page" />
+        <put-attribute name="body" value="/WEB-INF/pages/ProductDescription.jsp" />
+    </definition>
 </tiles-definitions>

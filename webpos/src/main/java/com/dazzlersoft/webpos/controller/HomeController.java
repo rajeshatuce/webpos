@@ -25,15 +25,20 @@ public class HomeController {
 
 	@RequestMapping("/home")
     public String invokeHomeController(@RequestParam(required=false) Long categoryId,final Map<String, Object> map) {
+		List<Category> result = findListOfCategories(categoryId);
+		map.put("categoryList", result);
+		map.put("productList", webPosService.getProductsForCategory(categoryId));
+        return "whatsnew";
+    }
+
+	private List<Category> findListOfCategories(Long categoryId) {
 		List<Category> categoryList=webPosService.fetchAllCategory();
 		List<Category> result=new ArrayList<Category>();
 		result.add(getWhatsNewCategory());
 		result.addAll(categoryList);
 		updateSetSelectOnBasisOfCategory(result, categoryId);
-		map.put("categoryList", result);
-		map.put("productList", webPosService.getProductsForCategory(categoryId));
-        return "whatsnew";
-    }
+		return result;
+	}
 	
 	@RequestMapping("/getResource")
 	public void streamImageForImageId(@RequestParam("imageId")String imageId,HttpServletResponse response){
@@ -57,6 +62,13 @@ public class HomeController {
 			e.printStackTrace();
 			return "error";
 		}
+	}
+	@RequestMapping("/selectProduct")
+	public String selectProduct(@RequestParam("selectedProduct")Long selectedProduct,@RequestParam(required=false) Long categoryId,final Map<String, Object> map){
+		LOG.info("Selected Product:"+selectedProduct);
+		List<Category> result = findListOfCategories(categoryId);
+		map.put("categoryList", result);
+		return "productDescription";
 	}
 	
 	private Category getWhatsNewCategory(){

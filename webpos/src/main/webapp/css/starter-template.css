@@ -8,5 +8,8 @@ body {
 
 .thumbnail:hover{
 	border-color: #ffd926;
-	cursor: pointer;
+}
+
+.productImage{
+	cursor:pointer;
 }
