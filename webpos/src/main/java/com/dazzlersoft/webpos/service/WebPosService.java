@@ -15,5 +15,7 @@ public interface WebPosService {
 	public byte[] getImageFromRepository(String imageId) throws WebPosGenericException;
 	
 	public void addImage() throws Exception;
+	
+	public Product getSelectedProductDetail(Long itemInventoryId);
 
 }

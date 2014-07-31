@@ -68,6 +68,7 @@ public class HomeController {
 		LOG.info("Selected Product:"+selectedProduct);
 		List<Category> result = findListOfCategories(categoryId);
 		map.put("categoryList", result);
+		map.put("product", webPosService.getSelectedProductDetail(selectedProduct));
 		return "productDescription";
 	}
 	

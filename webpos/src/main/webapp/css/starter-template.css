@@ -13,3 +13,7 @@ body {
 .productImage{
 	cursor:pointer;
 }
+
+.alignCenter{
+	 text-align: center;
+}

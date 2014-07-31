@@ -12,6 +12,16 @@ public class Product implements Serializable {
 	
 	private String productName;
 	
+	private String productDescription;
+	
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
+	}
+
 	private String productPrice;
 	
 	private Long inventoryId;

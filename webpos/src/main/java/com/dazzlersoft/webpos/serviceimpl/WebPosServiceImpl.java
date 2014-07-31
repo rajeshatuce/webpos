@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dazzlersoft.webpos.dao.CategoryDao;
 import com.dazzlersoft.webpos.dao.ContentRepositoryDao;
+import com.dazzlersoft.webpos.dao.ItemInventoryDao;
 import com.dazzlersoft.webpos.model.Category;
 import com.dazzlersoft.webpos.model.Item;
 import com.dazzlersoft.webpos.model.ItemInventory;
@@ -31,6 +32,8 @@ public class WebPosServiceImpl implements WebPosService {
 	private CategoryDao categoryDao;
 	@Autowired
 	private ContentRepositoryDao dao;
+	@Autowired
+	private ItemInventoryDao itemInventoryDao;
 
 	@Transactional
 	public List<Category> fetchAllCategory() {
@@ -81,6 +84,18 @@ public class WebPosServiceImpl implements WebPosService {
 	public void addImage() throws Exception{
 		dao.addContent();
 		
+	}
+
+	@Transactional
+	public Product getSelectedProductDetail(Long itemInventoryId) {
+		ItemInventory inventory=itemInventoryDao.findById(itemInventoryId);
+		Product product=new Product();
+		product.setProductName(inventory.getItem().getItemName());
+		product.setProductDescription(inventory.getItem().getItemDescription());
+		product.setProductPrice(WebPosUtility.formatNumber(inventory.getUnitPrice()));
+		product.setProductImageUrl(inventory.getImage().getImageKey());
+		product.setInventoryId(inventory.getItemInventoryId());
+		return product;
 	}
 
 }
