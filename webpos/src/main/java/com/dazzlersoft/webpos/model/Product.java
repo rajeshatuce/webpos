@@ -14,6 +14,44 @@ public class Product implements Serializable {
 	
 	private String productDescription;
 	
+	private int quantityAvailable;
+	
+	private String color;
+	private BigDecimal size;
+	private String sizeMeasurement;
+	
+	public String getSizeMeasurement() {
+		return sizeMeasurement;
+	}
+
+	public void setSizeMeasurement(String sizeMeasurement) {
+		this.sizeMeasurement = sizeMeasurement;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public BigDecimal getSize() {
+		return size;
+	}
+
+	public void setSize(BigDecimal size) {
+		this.size = size;
+	}
+
 	public String getProductDescription() {
 		return productDescription;
 	}

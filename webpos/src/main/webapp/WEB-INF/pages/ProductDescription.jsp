@@ -19,6 +19,9 @@
   <div class="media-body">
     <h4 class="media-heading">Product Description</h4>
     <p>${product.productDescription}</p>
+    <p>Color: ${product.color}</p>
+    <p>Size: ${product.size} </p>
+    <p>Quantity Available: ${product.quantityAvailable}</p>
     <p><a class="btn btn-primary btn-lg" title="Add to Cart" role="button"><img height="50" witdth="90" src="../img/shopping_cart.png"/></a></p>
   </div>
 </div>
