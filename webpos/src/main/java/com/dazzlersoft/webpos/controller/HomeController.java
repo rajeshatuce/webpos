@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -19,17 +20,20 @@ import com.dazzlersoft.webpos.service.WebPosService;
 
 @Controller
 public class HomeController {
+	private static final String MYCART = "mycart";
+	private static final String MYCARTCOUNT = "mycartcount";
 	private static final Log LOG = LogFactory.getLog(HomeController.class);
 	@Autowired
 	private WebPosService webPosService;
 
 	@RequestMapping("/home")
-    public String invokeHomeController(@RequestParam(required=false) Long categoryId,final Map<String, Object> map) {
+	public String invokeHomeController(@RequestParam(required=false) Long categoryId,HttpServletRequest request,final Map<String, Object> map) {
 		List<Category> result = findListOfCategories(categoryId);
 		map.put("categoryList", result);
 		map.put("productList", webPosService.getProductsForCategory(categoryId));
-        return "whatsnew";
-    }
+		map.put(MYCARTCOUNT, getCountOfItemSelectedForPurchase(request));
+		return "whatsnew";
+	}
 
 	private List<Category> findListOfCategories(Long categoryId) {
 		List<Category> categoryList=webPosService.fetchAllCategory();
@@ -39,7 +43,17 @@ public class HomeController {
 		updateSetSelectOnBasisOfCategory(result, categoryId);
 		return result;
 	}
-	
+
+	private String getCountOfItemSelectedForPurchase(HttpServletRequest request){
+		String count="0";
+		if(request.getSession().getAttribute(MYCART)!=null){
+			@SuppressWarnings("unchecked")
+			List<Long> cart=(List<Long>) request.getSession().getAttribute(MYCART);
+			count=cart.size()+"";
+		}
+		return count;
+	}
+
 	@RequestMapping("/getResource")
 	public void streamImageForImageId(@RequestParam("imageId")String imageId,HttpServletResponse response){
 		LOG.info("Fetching image content for imageId:"+imageId);
@@ -51,7 +65,7 @@ public class HomeController {
 			LOG.error("Error occurred while fetching image with imageId:"+imageId,err);
 		}
 	}
-	
+
 	@RequestMapping("/addImage")
 	public @ResponseBody String addImage(){
 		try {
@@ -64,21 +78,62 @@ public class HomeController {
 		}
 	}
 	@RequestMapping("/selectProduct")
-	public String selectProduct(@RequestParam("selectedProduct")Long selectedProduct,@RequestParam(required=false) Long categoryId,final Map<String, Object> map){
+	public String selectProduct(@RequestParam("selectedProduct")Long selectedProduct,@RequestParam(required=false) Long categoryId,@RequestParam(required=false) Long addProductToCart,HttpServletRequest request,final Map<String, Object> map){
 		LOG.info("Selected Product:"+selectedProduct);
 		List<Category> result = findListOfCategories(categoryId);
 		map.put("categoryList", result);
+		if(addProductToCart!=null && addProductToCart==1){
+			addproductToCart(selectedProduct, request);
+		}else if(addProductToCart!=null && addProductToCart==0){
+			removeProductFromCart(selectedProduct, request);
+
+		}
+		map.put(MYCARTCOUNT, getCountOfItemSelectedForPurchase(request));
+		map.put("isSelectedProductAddedToCart", isSelectedProductAlreadyAddedToCart(selectedProduct, request));
 		map.put("product", webPosService.getSelectedProductDetail(selectedProduct));
+
 		return "productDescription";
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	private void addproductToCart(Long selectedProduct,HttpServletRequest request){
+		List<Long> selectedProductList=null;
+		if(request.getSession().getAttribute(MYCART)!=null){
+			selectedProductList=(List<Long>) request.getSession().getAttribute(MYCART);
+		}else{
+			selectedProductList=new ArrayList<Long>();
+			request.getSession().setAttribute(MYCART, selectedProductList);
+		}
+		if(!selectedProductList.contains(selectedProduct)){
+			selectedProductList.add(selectedProduct);
+		}
+		
+	}
+	@SuppressWarnings("unchecked")
+	private void removeProductFromCart(Long selectedProduct,HttpServletRequest request){
+		if(request.getSession().getAttribute(MYCART)!=null){
+			List<Long> selectedProductList=(List<Long>) request.getSession().getAttribute(MYCART);
+			selectedProductList.remove(selectedProduct);
+		}
+	}
+	@SuppressWarnings("unchecked")
+	private boolean isSelectedProductAlreadyAddedToCart(Long selectedProduct,HttpServletRequest request){
+		List<Long> selectedProductList=null;
+		if(request.getSession().getAttribute(MYCART)!=null){
+			selectedProductList=(List<Long>) request.getSession().getAttribute(MYCART);
+			if(selectedProductList.contains(selectedProduct)){
+				return true;
+			}
+		}
+		return false;
+	}
 	private Category getWhatsNewCategory(){
 		Category category=new Category();
 		category.setCategoryName("What's New");
 		category.setCategoryId(0l);
 		return category;
 	}
-	
+
 	private void updateSetSelectOnBasisOfCategory(List<Category> result,Long categoryId){
 		if(categoryId==null){
 			categoryId=0l;//make whats new as selected

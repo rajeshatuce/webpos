@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><img  style="padding-right:2px;" height="20" src="../img/mycart.png"/>(0)</a></li>
+            <li><a href="#"><img  style="padding-right:2px;" height="20" src="../img/mycart.png"/>(${mycartcount})</a></li>
             <li><a href="#">Signup</a></li>
             <li><a href="#">Login</a></li>
             <li><a href="#">Help</a></li>

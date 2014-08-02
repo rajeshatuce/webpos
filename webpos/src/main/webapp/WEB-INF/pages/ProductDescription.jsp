@@ -10,8 +10,13 @@
 						<div class="caption">
 						<p class="alignCenter">${product.productName}</p>
 						<h3 class="alignCenter">Rs.${product.productPrice}</h3>
-						<input type="hidden" id="productKey"
+						<form id="toggleCartForm" action="selectProduct" method="post">
+						<input type="hidden" id="selectedProduct" name="selectedProduct"
 							value="${product.inventoryId}" />
+						<input type="hidden" name="categoryId" value="" id="categoryId" />
+						<input type="hidden" name="addProductToCart" id="addProductToCart" value="0" />
+						</form>
+						
 					</div>
 				
 				</div>
@@ -22,6 +27,18 @@
     <p>Color: ${product.color}</p>
     <p>Size: ${product.size} </p>
     <p>Quantity Available: ${product.quantityAvailable}</p>
-    <p><a class="btn btn-primary btn-lg" title="Add to Cart" role="button"><img height="50" witdth="90" src="../img/shopping_cart.png"/></a></p>
+    <p><a id="cartButton" class="btn btn-primary btn-lg" id="toggleCart" title="Add to Cart" role="button">
+    <c:choose>
+    <c:when test="${isSelectedProductAddedToCart}">
+    <img  height="50" witdth="90" src="../img/tick.png"/>
+    </c:when>
+    <c:otherwise>
+    <img  height="50" witdth="90" src="../img/shopping_cart.png"/>
+    </c:otherwise>
+    
+    </c:choose>
+    
+    
+    </a></p>
   </div>
 </div>

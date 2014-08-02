@@ -10,5 +10,16 @@ $(document).ready(function(){
 		$("#productSelection").submit();
 	});
 	
-	
+	$("#cartButton").click(function(event){
+		var childLink=$(".active").children()[0];
+		var linkRef=$(childLink).attr('href');
+		$("#categoryId").val(linkRef.split("=")[1]);
+		if($("#cartButton").find("img").attr("src").indexOf("shopping_cart.png")!=-1){
+			$("#addProductToCart").val(1);
+		}else{
+			$("#addProductToCart").val(0);
+		}
+		$("#toggleCartForm").submit();
+		return false;
+	});
 });
