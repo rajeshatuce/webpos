@@ -17,3 +17,17 @@ body {
 .alignCenter{
 	 text-align: center;
 }
+
+#mycustomsidebar{
+	z-index:0;
+}
+
+.myDialog{
+	display: none;
+}
+
+.midPosition{
+	position:absolute;
+	top:40%;
+	left:40%;
+}

@@ -101,4 +101,28 @@ public class WebPosServiceImpl implements WebPosService {
 		return product;
 	}
 
+	@Transactional
+	public List<Product> getMyCartContent(List<Long> inventoryList) {
+		List<ItemInventory> invList=itemInventoryDao.findByInventoryIdList(inventoryList);
+		List<Product> result=new ArrayList<Product>();
+		for(ItemInventory inventory:invList){
+			Product product=new Product();
+			product.setProductName(inventory.getItem().getItemName());
+			product.setProductDescription(inventory.getItem().getItemDescription());
+			product.setProductPrice(WebPosUtility.formatNumber(inventory.getUnitPrice()));
+			product.setProductImageUrl(inventory.getImage().getImageKey());
+			product.setInventoryId(inventory.getItemInventoryId());
+			product.setColor(inventory.getColor());
+			product.setQuantityAvailable(inventory.getQuantityAvailable());
+			product.setSize(inventory.getItmSize());
+			List<Integer> quantitySelectList=new ArrayList<Integer>();
+			for(int i=1;i<=inventory.getQuantityAvailable();i++){
+				quantitySelectList.add(i);
+			}
+			product.setQuantityAvailableSelectList(quantitySelectList);
+			result.add(product);
+		}
+		return result;
+	}
+
 }

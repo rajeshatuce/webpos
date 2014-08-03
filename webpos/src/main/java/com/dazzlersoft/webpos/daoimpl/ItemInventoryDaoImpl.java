@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -120,5 +123,14 @@ public class ItemInventoryDaoImpl implements ItemInventoryDao {
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ItemInventory> findByInventoryIdList(List<Long> iventoryIdList) {
+		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(ItemInventory.class);
+		criteria.add(Restrictions.in("itemInventoryId", iventoryIdList));
+		criteria.createAlias("item", "i");
+		criteria.addOrder(Order.asc("i.itemName"));
+		return criteria.list();
 	}
 }

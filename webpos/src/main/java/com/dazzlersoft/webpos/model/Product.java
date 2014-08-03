@@ -2,6 +2,7 @@ package com.dazzlersoft.webpos.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Product implements Serializable {
 
@@ -16,6 +17,17 @@ public class Product implements Serializable {
 	
 	private int quantityAvailable;
 	
+	private List<Integer> quantityAvailableSelectList;
+	
+	public List<Integer> getQuantityAvailableSelectList() {
+		return quantityAvailableSelectList;
+	}
+
+	public void setQuantityAvailableSelectList(
+			List<Integer> quantityAvailableSelectList) {
+		this.quantityAvailableSelectList = quantityAvailableSelectList;
+	}
+
 	private String color;
 	private BigDecimal size;
 	private String sizeMeasurement;

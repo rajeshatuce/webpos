@@ -1,6 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- <div class="col-sm-3 col-md-2 sidebar">
+ <div id="mycustomsidebar" class="col-sm-3 col-md-2 sidebar">
                <ul class="nav nav-sidebar">
                 	 <c:forEach var="category" items="${categoryList}">
     						<c:choose>

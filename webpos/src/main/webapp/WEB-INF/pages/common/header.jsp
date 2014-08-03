@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><img  style="padding-right:2px;" height="20" src="../img/mycart.png"/>(${mycartcount})</a></li>
+            <li><a href="#" id="myShoppingCartBtn"><img  style="padding-right:2px;" height="20" src="../img/mycart.png"/>(${mycartcount})</a></li>
             <li><a href="#">Signup</a></li>
             <li><a href="#">Login</a></li>
             <li><a href="#">Help</a></li>
@@ -29,3 +29,12 @@
         </div>
       </div>
       </div>
+      
+      <div id="shoppingcart" title="My Shopping Cart" class="myDialog">
+        <div id="myCartAjaxLoad" class="midPosition">
+          <img src="../img/loader.gif"/>
+        </div>
+        <div id="myCartContent" class="">
+        </div>
+      </div>
+      

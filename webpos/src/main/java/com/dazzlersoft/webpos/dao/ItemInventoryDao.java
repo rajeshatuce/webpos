@@ -11,5 +11,6 @@ public interface ItemInventoryDao {
 	public void delete(ItemInventory persistentInstance);
 	public ItemInventory merge(ItemInventory detachedInstance);
 	public ItemInventory findById(long id);
+	public List<ItemInventory> findByInventoryIdList(List<Long> iventoryIdList);
 	public List<ItemInventory> findByExample(ItemInventory instance);
 }

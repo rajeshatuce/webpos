@@ -17,5 +17,7 @@ public interface WebPosService {
 	public void addImage() throws Exception;
 	
 	public Product getSelectedProductDetail(Long itemInventoryId);
+	
+	public List<Product> getMyCartContent(List<Long> inventoryList);
 
 }
