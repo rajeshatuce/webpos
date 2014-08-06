@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dazzlersoft.webpos.model.Category;
 import com.dazzlersoft.webpos.model.Product;
+import com.dazzlersoft.webpos.model.ProductPriceDto;
 import com.dazzlersoft.webposutil.WebPosGenericException;
 
 public interface WebPosService {
@@ -18,6 +19,6 @@ public interface WebPosService {
 	
 	public Product getSelectedProductDetail(Long itemInventoryId);
 	
-	public List<Product> getMyCartContent(List<Long> inventoryList);
+	public ProductPriceDto getMyCartContent(List<Long> inventoryList);
 
 }

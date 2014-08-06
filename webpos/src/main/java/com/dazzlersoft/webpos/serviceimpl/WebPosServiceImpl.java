@@ -1,5 +1,6 @@
 package com.dazzlersoft.webpos.serviceimpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.dazzlersoft.webpos.model.Category;
 import com.dazzlersoft.webpos.model.Item;
 import com.dazzlersoft.webpos.model.ItemInventory;
 import com.dazzlersoft.webpos.model.Product;
+import com.dazzlersoft.webpos.model.ProductPriceDto;
 import com.dazzlersoft.webpos.service.WebPosService;
 import com.dazzlersoft.webposutil.WebPosConstants;
 import com.dazzlersoft.webposutil.WebPosGenericException;
@@ -102,14 +104,17 @@ public class WebPosServiceImpl implements WebPosService {
 	}
 
 	@Transactional
-	public List<Product> getMyCartContent(List<Long> inventoryList) {
+	public ProductPriceDto getMyCartContent(List<Long> inventoryList) {
 		List<ItemInventory> invList=itemInventoryDao.findByInventoryIdList(inventoryList);
+		BigDecimal totalPrice=new BigDecimal(0);
 		List<Product> result=new ArrayList<Product>();
 		for(ItemInventory inventory:invList){
 			Product product=new Product();
 			product.setProductName(inventory.getItem().getItemName());
 			product.setProductDescription(inventory.getItem().getItemDescription());
 			product.setProductPrice(WebPosUtility.formatNumber(inventory.getUnitPrice()));
+			product.setOriginalProductPrice(inventory.getUnitPrice());
+			totalPrice=totalPrice.add(inventory.getUnitPrice());
 			product.setProductImageUrl(inventory.getImage().getImageKey());
 			product.setInventoryId(inventory.getItemInventoryId());
 			product.setColor(inventory.getColor());
@@ -122,7 +127,11 @@ public class WebPosServiceImpl implements WebPosService {
 			product.setQuantityAvailableSelectList(quantitySelectList);
 			result.add(product);
 		}
-		return result;
+		ProductPriceDto dto=new ProductPriceDto();
+		dto.setProductList(result);
+		dto.setTotalPrice(totalPrice);
+		dto.setFormattedTotalPrice(WebPosUtility.formatNumber(totalPrice));
+		return dto;
 	}
 
 }

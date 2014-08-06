@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dazzlersoft.webpos.model.Category;
 import com.dazzlersoft.webpos.model.Product;
+import com.dazzlersoft.webpos.model.ProductPriceDto;
 import com.dazzlersoft.webpos.service.WebPosService;
 
 @Controller
@@ -96,8 +97,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/myCart")
-	public  @ResponseBody List<Product> showMyCart(HttpServletRequest request,final Map<String, Object> map){
-		List<Product> result=new ArrayList<Product>();
+	public  @ResponseBody ProductPriceDto showMyCart(HttpServletRequest request,final Map<String, Object> map){
+		ProductPriceDto result=null;
 		if(request.getSession().getAttribute(MYCART)!=null){
 			List<Long> inventoryList=(List<Long>) request.getSession().getAttribute(MYCART);
 			result=webPosService.getMyCartContent(inventoryList);

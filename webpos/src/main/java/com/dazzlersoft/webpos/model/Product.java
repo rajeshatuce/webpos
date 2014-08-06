@@ -74,10 +74,20 @@ public class Product implements Serializable {
 
 	private String productPrice;
 	
+	private BigDecimal originalProductPrice;
+	
 	private Long inventoryId;
 	
 	public Long getInventoryId() {
 		return inventoryId;
+	}
+
+	public BigDecimal getOriginalProductPrice() {
+		return originalProductPrice;
+	}
+
+	public void setOriginalProductPrice(BigDecimal originalProductPrice) {
+		this.originalProductPrice = originalProductPrice;
 	}
 
 	public void setInventoryId(Long inventoryId) {
