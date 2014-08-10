@@ -105,6 +105,15 @@ public class HomeController {
 		}
 		return result;
 	}
+	@RequestMapping("/deleteProductFromCart")
+	public @ResponseBody int deleteProductFromCart(@RequestParam("deleteInventoryId")Long deleteInventoryId,HttpServletRequest request,final Map<String, Object> map){
+		if(request.getSession().getAttribute(MYCART)!=null){
+			List<Long> inventoryList=(List<Long>) request.getSession().getAttribute(MYCART);
+			inventoryList.remove(deleteInventoryId);
+			return inventoryList.size();
+		}
+		return 0;
+	}
 
 	@SuppressWarnings("unchecked")
 	private void addproductToCart(Long selectedProduct,HttpServletRequest request){

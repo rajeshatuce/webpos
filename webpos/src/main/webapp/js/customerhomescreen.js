@@ -59,6 +59,32 @@ $(document).ready(function(){
 		$(event.target).parent().parent().find("[name='originalPrice']").parent().find("span").text("Rs. "+totalPrice.format(2,3));
 		reCalculateAndSetTotalPriceOfMyCart();
 		});
+	$("#shoppingcart").on("click","#deleteFromMyCartButton",function(event){
+		var serialNo=$(event.target).parent().parent().parent().find("[name='id']").parent().find("span").text().trim();
+		var inventoryId=$(event.target).parent().parent().parent().find("[name='id']").val();
+		$('<div></div>').appendTo('body')
+	    .html('<div><h6>Are you sure you want to delete the selected item no:<b>'+serialNo+' </b>?</h6></div>')
+	    .dialog({
+	        modal: true,
+	        title: 'Confirmation',
+	        zIndex: 20000,
+	        autoOpen: true,
+	        width: 'auto',
+	        resizable: false,
+	        buttons: {
+	            Yes: function () {
+	            	removeInventoryIdFromMyCart(inventoryId);
+	                $(this).dialog("close");
+	            },
+	            No: function () {
+	                $(this).dialog("close");
+	            }
+	        },
+	        close: function (event, ui) {
+	            $(this).remove();
+	        }
+	    });
+	});
 	
 });
 
@@ -123,6 +149,16 @@ function getQuantityColumn(quantityList){
 	}
 	quantity=quantity+'</select>';
 	return quantity;
+}
+
+function removeInventoryIdFromMyCart(inventoryId){
+	$("#myCartAjaxLoad").show();
+	$("#myCartContent").hide();
+	$.ajaxSetup({ cache: false });
+	$.getJSON( "deleteProductFromCart?deleteInventoryId="+inventoryId, function( data ) {
+		$("#myShoppingCartBtnTxt").text(data);
+		fetchMyCartContent();
+	});
 }
 
 function reCalculateAndSetTotalPriceOfMyCart(){
